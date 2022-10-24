@@ -1,0 +1,20 @@
+{
+  "name": "comision-3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress open --e2e -b chrome ",
+    "primerTest": "npx cypress run  --spec 'cypress/e2e/primerTest.cy.js'",
+    "prod": "npx cypress open --e2e -b electron --config baseUrl=https://pushing-front.vercel.app",
+    "testing": "npx cypress open --e2e -b electron --config baseUrl=https://pushing-it.vercel.app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^10.3.0",
+    "cypress-xpath": "^2.0.1"
+  },
+  "description": ""
+}
