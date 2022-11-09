@@ -1,18 +1,20 @@
 /// <reference types="cypress" />
 
-// import { LoginPage } from "../support/pages/loginPage";
-// import { RegistroPage } from "../support/pages/registroPage";
 import { HomePage } from "../support/pages/homePage";
 import { Products } from "../support/pages/productsPage";
 import { ShoppingCartPage } from "../support/pages/shoppingCartPage";
 import { Checkout } from "../support/pages/checkout";
 import { Recipt } from "../support/pages/recipt";
 
-describe("Esperas", () => {
+describe("POM", () => {
   let datosCheckout;
   let datosProducts;
-  // const loginPage = new LoginPage();
-  // const registroPage = new RegistroPage();
+  const user = "Lurimago";
+  const pass = "123456!";
+  const sex = "male";
+  const day = 13;
+  const month = "December";
+  const year = 1992;
   const homepage = new HomePage();
   const products = new Products();
   const shoppingCartPage = new ShoppingCartPage();
@@ -31,20 +33,20 @@ describe("Esperas", () => {
       url: "https://pushing-it-backend.herokuapp.com/api/register",
       method: "POST",
       body: {
-        username: "Lurimago3",
-        password: "123456!",
-        gender: "male",
-        day: "13",
-        month: "Diciembre",
-        year: "1992",
+        username: user,
+        password: pass,
+        gender: sex,
+        day: day,
+        month: month,
+        year: year,
       },
     }).then(() => {
       cy.request({
         url: "https://pushing-it-backend.herokuapp.com/api/login",
         method: "POST",
         body: {
-          username: "Lurimago3",
-          password: "123456!",
+          username: user,
+          password: pass,
         },
       }).then((respuesta) => {
         window.localStorage.setItem("token", respuesta.body.token);
@@ -54,16 +56,7 @@ describe("Esperas", () => {
     });
   });
 
-  // beforeEach("beforeEach", () => {
-  //   cy.visit("");
-  //   registroPage.ClickRegisterTogleButton();
-  //   loginPage.login(
-  //     datosLogin.datosValidos.usuario,
-  //     datosLogin.datosValidos.contraseña
-  //   );
-  // });
-
-  it("Deberia agregar 3 tareas al todo list", () => {
+  it("Test", () => {
     homepage.clickOnlineShopLink();
     products.addProducts(datosProducts.productoUnoNombre);
     products.clickCloseButton();
@@ -95,7 +88,7 @@ describe("Esperas", () => {
     checkout.cardNumber(datosCheckout.tarjeta);
     checkout.purchaseButton();
 
-    cy.wait(10000);
+    cy.wait(8000);
     recipt.checkName(datosCheckout.nombre);
     recipt.checkLastName(datosCheckout.apellido);
 
@@ -108,9 +101,9 @@ describe("Esperas", () => {
     );
   });
 
-  after("delete user", () => {
+  after("Deleting User", () => {
     cy.request({
-      url: "https://pushing-it-backend.herokuapp.com/api/deleteuser/Lurimago3",
+      url: `https://pushing-it-backend.herokuapp.com/api/deleteuser/${user}`,
       method: "DELETE",
     });
   });
