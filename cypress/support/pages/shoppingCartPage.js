@@ -33,4 +33,8 @@ export class ShoppingCartPage {
         expect(valor).equal(totalPrice.toString());
       });
   }
+
+  clickButtonGotoCheckout() {
+    cy.xpath("//button[text()='Go to Checkout']").click();
+  }
 }
