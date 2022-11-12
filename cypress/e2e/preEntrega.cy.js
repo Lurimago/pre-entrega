@@ -88,7 +88,8 @@ describe("POM", () => {
     checkout.cardNumber(datosCheckout.tarjeta);
     checkout.purchaseButton();
 
-    cy.wait(8000);
+    cy.esperarMascaraDeCarga();
+
     recipt.checkName(datosCheckout.nombre);
     recipt.checkLastName(datosCheckout.apellido);
 
